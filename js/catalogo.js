@@ -33,6 +33,7 @@ const btnCarrosselAnterior = document.getElementById("carrosselAnterior");
 const btnCarrosselProximo = document.getElementById("carrosselProximo");
 const modalEsgotadoBanner = document.getElementById("modalEsgotadoBanner");
 const modalTitulo = document.getElementById("modalTitulo");
+const modalPreco = document.getElementById("modalPreco");
 const modalBadges = document.getElementById("modalBadges");
 const modalDescricao = document.getElementById("modalDescricao");
 const modalCores = document.getElementById("modalCores");
@@ -160,6 +161,7 @@ function renderizarGrid(lista) {
             </div>
             <div class="card-info">
                 <h3>${escapeHtml(peca.titulo)}</h3>
+                <p class="card-preco">${formatarPreco(peca.preco)}</p>
                 <p class="card-categoria">${escapeHtml(peca.categoria || "")}</p>
             </div>
         </article>
@@ -181,6 +183,7 @@ function abrirModal(id) {
     indiceImagemAtual = 0;
 
     modalTitulo.textContent = peca.titulo;
+    modalPreco.textContent = formatarPreco(peca.preco);
     modalDescricao.textContent = peca.descricao || "";
     modalEsgotadoBanner.classList.toggle("oculto", !peca.esgotado);
 
@@ -250,25 +253,55 @@ function rotuloNivelUso(nivel) {
     return { novo: "Novo", seminovo: "Seminovo", usado: "Usado" }[nivel] || nivel || "";
 }
 
+function formatarPreco(valor) {
+    return typeof valor === "number"
+        ? valor.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })
+        : "Consulte o valor";
+}
+
 // ============================================================
 // COMPARTILHAR
 // ============================================================
 function atualizarLinksCompartilhar(peca) {
     const link = `${location.origin}${location.pathname}?peca=${peca.id}`;
-    const texto = `Olha essa peça que encontrei no Brechó Sandrinha: ${peca.titulo} — ${link}`;
+    const mensagem = `Olá, tudo bem? Essa peça ainda está disponível: ${peca.titulo} — ${link}`;
 
-    btnCompartilharInstagram.href = `https://ig.me/m/${INSTAGRAM_HANDLE}`;
-    btnCompartilharInstagram.onclick = () => {
-        // O Instagram não aceita texto pré-preenchido via link, então copiamos
-        // o texto para a área de transferência para a pessoa colar na conversa.
-        copiarParaAreaDeTransferencia(texto, "Texto da peça copiado! Cole na conversa que abriu no Instagram.");
-    };
+    btnCompartilharInstagram.onclick = () => compartilharNoInstagram(peca, mensagem);
 
     btnCopiarLink.onclick = () => {
         // Sem número de WhatsApp no código: a pessoa copia o link e compartilha
         // por onde quiser (WhatsApp, SMS, etc.).
         copiarParaAreaDeTransferencia(link, "Link copiado! Cole numa conversa do WhatsApp (ou onde quiser).");
     };
+}
+
+async function compartilharNoInstagram(peca, mensagem) {
+    const urlImagem = peca.imagens?.[0]?.url;
+
+    // No celular: tenta usar o menu nativo de compartilhamento do aparelho (o mesmo
+    // que aparece ao compartilhar uma foto), já com a imagem e a mensagem juntas —
+    // a pessoa escolhe "Instagram" ali. É o mais próximo que a Instagram permite,
+    // já que não existe uma API pública pra pré-preencher o Direct por link.
+    if (urlImagem && navigator.canShare) {
+        try {
+            const resposta = await fetch(urlImagem);
+            const blob = await resposta.blob();
+            const arquivo = new File([blob], "peca.jpg", { type: blob.type || "image/jpeg" });
+
+            if (navigator.canShare({ files: [arquivo] })) {
+                await navigator.share({ files: [arquivo], text: mensagem, title: peca.titulo });
+                return;
+            }
+        } catch {
+            // Usuário cancelou o compartilhamento ou o navegador falhou — segue pro fallback abaixo.
+        }
+    }
+
+    // Fallback (computador, ou navegador sem suporte a compartilhar arquivos):
+    // abre a conversa do Instagram e copia a mensagem — a foto precisa ser enviada
+    // manualmente, já que a Instagram não aceita anexo por link.
+    window.open(`https://ig.me/m/${INSTAGRAM_HANDLE}`, "_blank", "noopener");
+    copiarParaAreaDeTransferencia(mensagem, "Mensagem copiada! Cole na conversa do Instagram (a foto precisa ser enviada manualmente).");
 }
 
 function copiarParaAreaDeTransferencia(texto, mensagem) {

@@ -30,6 +30,7 @@ const selectCategoria = document.getElementById("categoria");
 const formPeca = document.getElementById("formPeca");
 const tituloForm = document.getElementById("tituloForm");
 const campoTitulo = document.getElementById("titulo");
+const campoPreco = document.getElementById("preco");
 const campoDescricao = document.getElementById("descricao");
 const inputCor = document.getElementById("inputCor");
 const btnAddCor = document.getElementById("btnAddCor");
@@ -205,6 +206,7 @@ function renderizarListaPecas() {
                     : `<div class="peca-thumb"></div>`}
                 <div class="peca-info">
                     <h4>${escapeHtml(peca.titulo)}</h4>
+                    <p class="peca-preco">${formatarPreco(peca.preco)}</p>
                     <div class="peca-badges">
                         <span class="badge">${escapeHtml(peca.categoria || "Sem categoria")}</span>
                         <span class="badge badge-condicao">${rotuloNivelUso(peca.nivelUso)}</span>
@@ -233,6 +235,12 @@ function rotuloNivelUso(nivel) {
     return { novo: "Novo", seminovo: "Seminovo", usado: "Usado" }[nivel] || nivel || "";
 }
 
+function formatarPreco(valor) {
+    return typeof valor === "number"
+        ? valor.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })
+        : "Sem preço definido";
+}
+
 function iniciarEdicao(id) {
     const peca = cachePecas.find((item) => item.id === id);
     if (!peca) return;
@@ -240,6 +248,7 @@ function iniciarEdicao(id) {
     edicaoId = id;
     campoTitulo.value = peca.titulo || "";
     selectCategoria.value = peca.categoria || "";
+    campoPreco.value = typeof peca.preco === "number" ? peca.preco : "";
     campoDescricao.value = peca.descricao || "";
     campoNivelUso.value = peca.nivelUso || "novo";
     campoComEtiqueta.checked = Boolean(peca.comEtiqueta);
@@ -281,6 +290,11 @@ formPeca.addEventListener("submit", async (evento) => {
         return;
     }
 
+    if (!campoPreco.value || Number(campoPreco.value) < 0) {
+        statusForm.textContent = "Informe um preço válido.";
+        return;
+    }
+
     if (imagensExistentes.length === 0 && arquivosNovos.length === 0) {
         statusForm.textContent = "Adicione pelo menos uma foto da peça.";
         return;
@@ -301,6 +315,7 @@ formPeca.addEventListener("submit", async (evento) => {
         const dadosPeca = {
             titulo: campoTitulo.value.trim(),
             categoria: selectCategoria.value,
+            preco: Number(campoPreco.value),
             descricao: campoDescricao.value.trim(),
             cores,
             nivelUso: campoNivelUso.value,
