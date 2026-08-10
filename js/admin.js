@@ -35,7 +35,7 @@ const inputCor = document.getElementById("inputCor");
 const btnAddCor = document.getElementById("btnAddCor");
 const listaCores = document.getElementById("listaCores");
 const campoNivelUso = document.getElementById("nivelUso");
-const campoSemEtiqueta = document.getElementById("semEtiqueta");
+const campoComEtiqueta = document.getElementById("comEtiqueta");
 const campoEsgotado = document.getElementById("esgotado");
 const inputImagens = document.getElementById("imagens");
 const previewImagens = document.getElementById("previewImagens");
@@ -208,7 +208,7 @@ function renderizarListaPecas() {
                     <div class="peca-badges">
                         <span class="badge">${escapeHtml(peca.categoria || "Sem categoria")}</span>
                         <span class="badge badge-condicao">${rotuloNivelUso(peca.nivelUso)}</span>
-                        ${peca.semEtiqueta ? `<span class="badge badge-etiqueta">Sem etiqueta</span>` : ""}
+                        ${peca.comEtiqueta ? `<span class="badge badge-etiqueta">Com etiqueta</span>` : ""}
                         ${peca.esgotado ? `<span class="badge badge-esgotado">Esgotado</span>` : ""}
                     </div>
                     <div class="peca-acoes">
@@ -242,7 +242,7 @@ function iniciarEdicao(id) {
     selectCategoria.value = peca.categoria || "";
     campoDescricao.value = peca.descricao || "";
     campoNivelUso.value = peca.nivelUso || "novo";
-    campoSemEtiqueta.checked = Boolean(peca.semEtiqueta);
+    campoComEtiqueta.checked = Boolean(peca.comEtiqueta);
     campoEsgotado.checked = Boolean(peca.esgotado);
 
     cores = [...(peca.cores || [])];
@@ -304,7 +304,7 @@ formPeca.addEventListener("submit", async (evento) => {
             descricao: campoDescricao.value.trim(),
             cores,
             nivelUso: campoNivelUso.value,
-            semEtiqueta: campoSemEtiqueta.checked,
+            comEtiqueta: campoComEtiqueta.checked,
             esgotado: campoEsgotado.checked,
             imagens
         };
@@ -318,7 +318,7 @@ formPeca.addEventListener("submit", async (evento) => {
         limparFormulario();
     } catch (erro) {
         console.error(erro);
-        statusForm.textContent = "Erro ao salvar a peça. Tente novamente.";
+        statusForm.textContent = `Erro ao salvar a peça: ${erro.code || erro.message || "tente novamente"}`;
     } finally {
         botaoSalvar.disabled = false;
     }

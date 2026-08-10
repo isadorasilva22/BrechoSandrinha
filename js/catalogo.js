@@ -19,7 +19,7 @@ const INSTAGRAM_HANDLE = "brechosandrinha2026"; // @ do Instagram, sem o "@"
 const campoBusca = document.getElementById("busca");
 const filtroCategorias = document.getElementById("filtroCategorias");
 const filtroCores = document.getElementById("filtroCores");
-const filtroSemEtiqueta = document.getElementById("filtroSemEtiqueta");
+const filtroComEtiqueta = document.getElementById("filtroComEtiqueta");
 const filtroOcultarEsgotados = document.getElementById("filtroOcultarEsgotados");
 const btnLimparFiltros = document.getElementById("btnLimparFiltros");
 const contador = document.getElementById("contador");
@@ -110,7 +110,7 @@ function aplicarFiltros() {
     const categoriasSelecionadas = obterValoresMarcados(filtroCategorias, "filtroCategoria");
     const coresSelecionadas = obterValoresMarcados(filtroCores, "filtroCor");
     const niveisSelecionados = Array.from(document.querySelectorAll(".filtroNivelUso:checked")).map((checkbox) => checkbox.value);
-    const somenteSemEtiqueta = filtroSemEtiqueta.checked;
+    const somenteComEtiqueta = filtroComEtiqueta.checked;
     const ocultarEsgotados = filtroOcultarEsgotados.checked;
 
     const filtradas = todasPecas.filter((peca) => {
@@ -118,7 +118,7 @@ function aplicarFiltros() {
         if (categoriasSelecionadas.length && !categoriasSelecionadas.includes(peca.categoria)) return false;
         if (niveisSelecionados.length && !niveisSelecionados.includes(peca.nivelUso)) return false;
         if (coresSelecionadas.length && !(peca.cores || []).some((cor) => coresSelecionadas.includes(cor))) return false;
-        if (somenteSemEtiqueta && !peca.semEtiqueta) return false;
+        if (somenteComEtiqueta && !peca.comEtiqueta) return false;
         if (ocultarEsgotados && peca.esgotado) return false;
         return true;
     });
@@ -127,12 +127,12 @@ function aplicarFiltros() {
 }
 
 [campoBusca].forEach((elemento) => elemento.addEventListener("input", aplicarFiltros));
-[filtroSemEtiqueta, filtroOcultarEsgotados].forEach((elemento) => elemento.addEventListener("change", aplicarFiltros));
+[filtroComEtiqueta, filtroOcultarEsgotados].forEach((elemento) => elemento.addEventListener("change", aplicarFiltros));
 document.querySelectorAll(".filtroNivelUso").forEach((checkbox) => checkbox.addEventListener("change", aplicarFiltros));
 
 btnLimparFiltros.addEventListener("click", () => {
     campoBusca.value = "";
-    filtroSemEtiqueta.checked = false;
+    filtroComEtiqueta.checked = false;
     filtroOcultarEsgotados.checked = false;
     document.querySelectorAll(".filtroNivelUso, .filtroCategoria, .filtroCor").forEach((checkbox) => { checkbox.checked = false; });
     aplicarFiltros();
@@ -187,7 +187,7 @@ function abrirModal(id) {
     modalBadges.innerHTML = `
         <span class="badge">${escapeHtml(peca.categoria || "")}</span>
         <span class="badge badge-condicao">${rotuloNivelUso(peca.nivelUso)}</span>
-        ${peca.semEtiqueta ? `<span class="badge badge-etiqueta">Sem etiqueta</span>` : ""}
+        ${peca.comEtiqueta ? `<span class="badge badge-etiqueta">Com etiqueta</span>` : ""}
     `;
 
     modalCores.innerHTML = (peca.cores || []).map((cor) => `<span class="chip">${escapeHtml(cor)}</span>`).join("");
