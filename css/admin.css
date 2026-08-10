@@ -1,0 +1,273 @@
+/* ============================================================
+   ADMIN (admin.html)
+   ============================================================ */
+
+.admin-main {
+    padding: 3rem 0 4rem;
+    min-height: 70vh;
+}
+
+.subtitulo {
+    color: var(--muted);
+}
+
+/* ------------------------------------------------------------
+   LOGIN
+   ------------------------------------------------------------ */
+.login-box {
+    max-width: 380px;
+    margin: 3rem auto;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 2.4rem;
+    box-shadow: var(--shadow);
+    text-align: center;
+}
+
+.login-box h1 {
+    font-size: 1.5rem;
+    margin-bottom: 0.4rem;
+}
+
+.login-box form {
+    text-align: left;
+    margin-top: 1.6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.login-box label {
+    font-weight: 700;
+    font-size: 0.85rem;
+    margin-top: 0.6rem;
+}
+
+.login-box button {
+    margin-top: 1rem;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+select,
+textarea {
+    width: 100%;
+    padding: 0.7rem 0.9rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--surface);
+    color: var(--text);
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+/* ------------------------------------------------------------
+   PAINEL
+   ------------------------------------------------------------ */
+.admin-topo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+
+.admin-grid {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 1.6rem;
+    align-items: start;
+}
+
+.painel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.6rem;
+    box-shadow: var(--shadow);
+}
+
+.painel h2 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.painel-peca form label {
+    display: block;
+    font-weight: 700;
+    font-size: 0.85rem;
+    margin: 0.9rem 0 0.35rem;
+}
+
+.formInline {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.listaCategorias {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.categoria-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 0.8rem;
+    background: var(--surface-soft);
+    border-radius: var(--radius-sm);
+    font-weight: 700;
+}
+
+.categoria-item button {
+    background: none;
+    border: none;
+    color: var(--muted);
+    cursor: pointer;
+}
+
+.categoria-item button:hover {
+    color: var(--danger);
+}
+
+.listaChips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.6rem;
+}
+
+.checkbox-linha {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.checkbox-linha label {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.checkbox-linha input {
+    width: auto;
+}
+
+.uploadImagem {
+    margin-top: 0.3rem;
+}
+
+.btnUpload {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.1rem;
+    border: 2px dashed var(--border);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    color: var(--muted);
+    font-weight: 700;
+}
+
+.btnUpload:hover {
+    border-color: var(--primary);
+    color: var(--primary-dark);
+}
+
+.previewImagens {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 0.8rem;
+}
+
+.previewImagens .miniatura {
+    position: relative;
+    width: 78px;
+    height: 78px;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    border: 1px solid var(--border);
+}
+
+.previewImagens .miniatura img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.previewImagens .miniatura button {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: rgba(74, 63, 53, 0.75);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 0.7rem;
+    line-height: 1;
+}
+
+.form-botoes {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.8rem;
+    margin-top: 1.4rem;
+}
+
+.painel-lista {
+    margin-top: 1.6rem;
+}
+
+.listaPecas {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem;
+}
+
+.peca-item {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--surface);
+}
+
+.peca-item .peca-thumb {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    background: var(--surface-soft);
+}
+
+.peca-item .peca-info {
+    padding: 0.8rem;
+}
+
+.peca-item .peca-info h4 {
+    font-family: var(--font-base);
+    font-size: 0.95rem;
+    margin-bottom: 0.3rem;
+}
+
+.peca-item .peca-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin: 0.4rem 0 0.7rem;
+}
+
+.peca-item .peca-acoes {
+    display: flex;
+    gap: 0.5rem;
+}

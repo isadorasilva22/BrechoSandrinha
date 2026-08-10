@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administração | Brechó Sandrinha</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Fraunces:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="container">
+            <a href="index.html" class="marca">
+                <img src="imagens/logo.jpeg" alt="Brechó Sandrinha" class="marca-logo">
+                Brechó Sandrinha
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="catalogo.html">Catálogo</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container admin-main">
+
+        <!-- ============================================================
+             LOGIN
+             ============================================================ -->
+        <section id="loginSection" class="login-box">
+            <h1><i class="fa-solid fa-lock"></i> Administração</h1>
+            <p class="subtitulo">Acesso restrito para gerenciar categorias e peças do catálogo.</p>
+            <form id="formLogin">
+                <label for="loginEmail">E-mail</label>
+                <input type="email" id="loginEmail" required placeholder="seuemail@exemplo.com">
+
+                <label for="loginSenha">Senha</label>
+                <input type="password" id="loginSenha" required placeholder="••••••••">
+
+                <p id="loginErro" class="erro"></p>
+
+                <button type="submit" class="btn btn-primary">Entrar</button>
+            </form>
+        </section>
+
+        <!-- ============================================================
+             PAINEL ADMIN (visível após login)
+             ============================================================ -->
+        <section id="adminSection" class="admin-panel oculto">
+
+            <div class="admin-topo">
+                <div>
+                    <h1>Painel do Brechó</h1>
+                    <p class="subtitulo">Logado como <strong id="usuarioLogado"></strong></p>
+                </div>
+                <button id="btnLogout" class="btn btn-ghost">
+                    <i class="fa-solid fa-right-from-bracket"></i> Sair
+                </button>
+            </div>
+
+            <div class="admin-grid">
+
+                <!-- CATEGORIAS -->
+                <div class="painel painel-categorias">
+                    <h2>Categorias</h2>
+                    <form id="formCategoria" class="formInline">
+                        <input type="text" id="novaCategoria" placeholder="Ex: Blusas" required>
+                        <button type="submit" class="btn btn-outline btn-sm">
+                            <i class="fa-solid fa-plus"></i> Adicionar
+                        </button>
+                    </form>
+                    <div id="listaCategorias" class="listaCategorias"></div>
+                </div>
+
+                <!-- CADASTRO DE PEÇAS -->
+                <div class="painel painel-peca">
+                    <h2 id="tituloForm">Nova peça</h2>
+                    <form id="formPeca">
+
+                        <label for="titulo">Título</label>
+                        <input type="text" id="titulo" required placeholder="Ex: Blusa de tricô lilás">
+
+                        <label for="categoria">Categoria</label>
+                        <select id="categoria" required>
+                            <option value="">Selecione uma categoria</option>
+                        </select>
+
+                        <label for="descricao">Descrição</label>
+                        <textarea id="descricao" rows="3" placeholder="Detalhes da peça, tecido, tamanho, medidas..."></textarea>
+
+                        <label for="inputCor">Cores</label>
+                        <div class="formInline">
+                            <input type="text" id="inputCor" placeholder="Ex: Bege">
+                            <button type="button" id="btnAddCor" class="btn btn-outline btn-sm">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </div>
+                        <div id="listaCores" class="listaChips"></div>
+
+                        <label for="nivelUso">Nível de uso</label>
+                        <select id="nivelUso" required>
+                            <option value="novo">Novo</option>
+                            <option value="seminovo">Seminovo</option>
+                            <option value="usado">Usado</option>
+                        </select>
+
+                        <div class="checkbox-linha">
+                            <label><input type="checkbox" id="semEtiqueta"> Sem etiqueta</label>
+                            <label><input type="checkbox" id="esgotado"> Esgotado</label>
+                        </div>
+
+                        <label for="imagens">Fotos (pode selecionar várias)</label>
+                        <div class="uploadImagem">
+                            <label for="imagens" class="btnUpload">
+                                <i class="fa-solid fa-camera"></i> Escolher fotos
+                            </label>
+                            <input type="file" id="imagens" accept="image/*" multiple hidden>
+                        </div>
+                        <div id="previewImagens" class="previewImagens"></div>
+
+                        <p id="statusForm" class="erro"></p>
+
+                        <div class="form-botoes">
+                            <button type="button" id="btnCancelarEdicao" class="btn btn-ghost oculto">Cancelar edição</button>
+                            <button type="submit" id="btnSalvar" class="btn btn-primary">
+                                <i class="fa-solid fa-check"></i> Salvar peça
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- LISTA DE PEÇAS -->
+            <div class="painel painel-lista">
+                <h2>Peças cadastradas</h2>
+                <div id="listaPecas" class="listaPecas"></div>
+            </div>
+
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; <span id="anoAtual"></span> Brechó Sandrinha — feito com carinho.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById("anoAtual").textContent = new Date().getFullYear();
+    </script>
+    <script type="module" src="js/auth.js"></script>
+    <script type="module" src="js/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo | Brechó Sandrinha</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/catalogo.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Fraunces:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="container">
+            <a href="index.html" class="marca">
+                <img src="imagens/logo.jpeg" alt="Brechó Sandrinha" class="marca-logo">
+                Brechó Sandrinha
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="catalogo.html">Catálogo</a></li>
+                    <li><a href="admin.html" class="btn-admin" title="Administração"><i class="fa-solid fa-lock"></i></a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container layout">
+
+        <aside class="sidebar">
+            <h2>Filtros</h2>
+
+            <div class="filtro-grupo">
+                <span class="filtro-titulo">Buscar</span>
+                <div class="pesquisa">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="busca" placeholder="Nome da peça...">
+                </div>
+            </div>
+
+            <div class="filtro-grupo">
+                <span class="filtro-titulo">Categoria</span>
+                <div id="filtroCategorias" class="filtro-lista"></div>
+            </div>
+
+            <div class="filtro-grupo">
+                <span class="filtro-titulo">Nível de uso</span>
+                <div class="filtro-lista">
+                    <label class="filtro-check"><input type="checkbox" class="filtroNivelUso" value="novo"> Novo</label>
+                    <label class="filtro-check"><input type="checkbox" class="filtroNivelUso" value="seminovo"> Seminovo</label>
+                    <label class="filtro-check"><input type="checkbox" class="filtroNivelUso" value="usado"> Usado</label>
+                </div>
+            </div>
+
+            <div class="filtro-grupo">
+                <span class="filtro-titulo">Cor</span>
+                <div id="filtroCores" class="filtro-lista"></div>
+            </div>
+
+            <div class="filtro-grupo">
+                <label class="filtro-check"><input type="checkbox" id="filtroSemEtiqueta"> Somente sem etiqueta</label>
+                <label class="filtro-check"><input type="checkbox" id="filtroOcultarEsgotados"> Ocultar esgotados</label>
+            </div>
+
+            <button id="btnLimparFiltros" class="btn btn-ghost btn-sm">Limpar filtros</button>
+        </aside>
+
+        <section class="conteudo">
+            <div class="conteudo-topo">
+                <p id="contador">Carregando peças...</p>
+            </div>
+            <div id="grid" class="grid"></div>
+        </section>
+    </main>
+
+    <!-- ============================================================
+         MODAL — detalhe da peça, carrossel de fotos e compartilhar
+         ============================================================ -->
+    <div id="modal" class="modal oculto">
+        <div class="modal-conteudo">
+            <button id="fecharModal" class="modal-fechar"><i class="fa-solid fa-xmark"></i></button>
+
+            <div class="carrossel">
+                <div id="carrosselImagens" class="carrossel-imagens"></div>
+                <button id="carrosselAnterior" class="carrossel-seta carrossel-seta-esquerda"><i class="fa-solid fa-chevron-left"></i></button>
+                <button id="carrosselProximo" class="carrossel-seta carrossel-seta-direita"><i class="fa-solid fa-chevron-right"></i></button>
+                <div id="carrosselIndicadores" class="carrossel-indicadores"></div>
+                <span id="modalEsgotadoBanner" class="modal-esgotado-banner oculto">Esgotado</span>
+            </div>
+
+            <div class="modal-info">
+                <h2 id="modalTitulo"></h2>
+                <div id="modalBadges" class="modal-badges"></div>
+                <p id="modalDescricao" class="modal-descricao"></p>
+                <div id="modalCores" class="modal-cores"></div>
+
+                <div class="modal-compartilhar">
+                    <span>Compartilhar:</span>
+                    <a id="btnCompartilharInstagram" href="#" target="_blank" rel="noopener" class="btn btn-outline btn-sm">
+                        <i class="fa-brands fa-instagram"></i> Instagram
+                    </a>
+                    <button type="button" id="btnCopiarLink" class="btn btn-outline btn-sm">
+                        <i class="fa-solid fa-link"></i> Copiar link
+                    </button>
+                </div>
+                <p id="modalAvisoCopia" class="modal-aviso-copia oculto"></p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; <span id="anoAtual"></span> Brechó Sandrinha — feito com carinho.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById("anoAtual").textContent = new Date().getFullYear();
+    </script>
+    <script type="module" src="js/catalogo.js"></script>
+</body>
+</html>

@@ -1,0 +1,96 @@
+/* ============================================================
+   RESPONSIVO — breakpoints compartilhados por index/catalogo/admin
+   ============================================================ */
+
+@media (max-width: 960px) {
+    /* index */
+    .hero-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .hero-text p {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .hero-image {
+        order: -1;
+        height: 220px;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .categoria-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    /* catálogo */
+    .layout {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        position: static;
+    }
+
+    /* admin */
+    .admin-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* modal */
+    .modal-conteudo {
+        grid-template-columns: 1fr;
+    }
+
+    .carrossel,
+    .carrossel-imagens {
+        min-height: 260px;
+    }
+}
+
+@media (max-width: 620px) {
+    header.site-header .container {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .marca {
+        font-size: 1.05rem;
+        gap: 0.4rem;
+        white-space: nowrap;
+    }
+
+    .marca i {
+        font-size: 1rem;
+    }
+
+    header.site-header nav ul {
+        gap: 1rem;
+        font-size: 0.85rem;
+    }
+
+    .hero-text h1 {
+        font-size: 2rem;
+    }
+
+    .categoria-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    }
+
+    .card-peca .card-thumb-wrap {
+        height: 190px;
+    }
+
+    .login-box {
+        margin: 1.5rem auto;
+        padding: 1.6rem;
+    }
+}

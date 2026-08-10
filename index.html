@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brechó Sandrinha</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Fraunces:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="container">
+            <a href="index.html" class="marca">
+                <img src="imagens/logo.jpeg" alt="Brechó Sandrinha" class="marca-logo">
+                Brechó Sandrinha
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="catalogo.html">Catálogo</a></li>
+                    <li><a href="#sobre">Sobre</a></li>
+                    <li><a href="admin.html" class="btn-admin" title="Administração"><i class="fa-solid fa-lock"></i></a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container hero-content">
+            <div class="hero-text">
+                <span class="tag">moda circular, com afeto</span>
+                <h1>Peças com história, prontas pra ganhar a sua</h1>
+                <p>
+                    O Brechó Sandrinha reúne roupas seminovas e usadas selecionadas com carinho.
+                    Navegue pelo catálogo, filtre por categoria, cor e estado de conservação, e
+                    compartilhe as peças que você amou.
+                </p>
+                <a href="catalogo.html" class="btn btn-primary">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    Ver catálogo
+                </a>
+            </div>
+            <div class="hero-image">
+                <div class="blob"></div>
+                <img src="imagens/logo.jpeg" alt="Brechó Sandrinha" class="hero-logo">
+            </div>
+        </div>
+    </section>
+
+    <section id="sobre" class="sobre">
+        <div class="container">
+            <h2>Por que garimpar no Brechó Sandrinha?</h2>
+            <div class="cards">
+                <div class="card">
+                    <i class="fa-solid fa-leaf"></i>
+                    <h3>Consumo consciente</h3>
+                    <p>Dar uma segunda vida às roupas é bom pro bolso e pro planeta.</p>
+                </div>
+                <div class="card">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <h3>Filtros que ajudam</h3>
+                    <p>Busque por categoria, cor, nível de uso e peças sem etiqueta.</p>
+                </div>
+                <div class="card">
+                    <i class="fa-solid fa-share-nodes"></i>
+                    <h3>Fácil de compartilhar</h3>
+                    <p>Achou a peça perfeita? Manda no Instagram na hora.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="categorias" class="categorias-preview">
+        <div class="container">
+            <h2>Categorias</h2>
+            <p class="subtitulo">As categorias do catálogo são cadastradas pela administração e aparecem automaticamente aqui.</p>
+            <div class="categoria-grid">
+                <a href="catalogo.html" class="categoria"><i class="fa-solid fa-shirt"></i><span>Blusas</span></a>
+                <a href="catalogo.html" class="categoria"><span class="icone-personalizado icone-calcas" aria-hidden="true"></span><span>Calças</span></a>
+                <a href="catalogo.html" class="categoria"><i class="fa-solid fa-glasses"></i><span>Acessórios</span></a>
+                <a href="catalogo.html" class="categoria"><i class="fa-solid fa-shoe-prints"></i><span>Calçados</span></a>
+                <a href="catalogo.html" class="categoria"><i class="fa-solid fa-ellipsis"></i><span>Outras</span></a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; <span id="anoAtual"></span> Brechó Sandrinha — feito com carinho.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById("anoAtual").textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

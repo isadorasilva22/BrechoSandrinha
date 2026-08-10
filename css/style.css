@@ -1,0 +1,304 @@
+/* ============================================================
+   BRECHÓ SANDRINHA — BASE
+   Reset, variáveis de cor (paleta terrosa clara), tipografia e
+   componentes reutilizáveis (botões, badges, chips, cards).
+   ============================================================ */
+
+:root {
+    /* paleta terrosa clara */
+    --bg: #FBF6EE;
+    --surface: #FFFFFF;
+    --surface-soft: #F3E9DC;
+    --primary: #C98A5E;
+    --primary-dark: #A8663B;
+    --secondary: #8A9B6E;
+    --accent: #D9A184;
+    --text: #4A3F35;
+    --muted: #8B7A6B;
+    --border: #E7DACB;
+    --danger: #B5533C;
+    --success: #6E8B5B;
+
+    --font-base: "Nunito", sans-serif;
+    --font-display: "Fraunces", serif;
+
+    --radius: 14px;
+    --radius-sm: 8px;
+    --shadow: 0 8px 24px rgba(74, 63, 53, 0.08);
+    --shadow-hover: 0 12px 32px rgba(74, 63, 53, 0.14);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-base);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+}
+
+button, input, select, textarea {
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    color: var(--text);
+}
+
+.container {
+    width: min(1180px, 92%);
+    margin: 0 auto;
+}
+
+/* ------------------------------------------------------------
+   MARCA (usada no header de todas as páginas)
+   ------------------------------------------------------------ */
+.marca {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--primary-dark);
+}
+
+.marca i {
+    font-size: 1.3rem;
+    color: var(--primary);
+}
+
+.marca-logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: top center;
+    border: 2px solid var(--surface);
+    box-shadow: var(--shadow);
+}
+
+/* ------------------------------------------------------------
+   BOTÕES
+   ------------------------------------------------------------ */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.6rem;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+    font-weight: 700;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.btn:active {
+    transform: scale(0.97);
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: #FFFFFF;
+    box-shadow: var(--shadow);
+}
+
+.btn-primary:hover {
+    background: var(--primary-dark);
+    box-shadow: var(--shadow-hover);
+}
+
+.btn-outline {
+    background: transparent;
+    color: var(--primary-dark);
+    border: 2px solid var(--primary);
+}
+
+.btn-outline:hover {
+    background: var(--primary);
+    color: #FFFFFF;
+}
+
+.btn-ghost {
+    background: transparent;
+    color: var(--muted);
+    padding: 0.5rem 1rem;
+}
+
+.btn-ghost:hover {
+    color: var(--text);
+}
+
+.btn-danger {
+    background: var(--danger);
+    color: #FFFFFF;
+}
+
+.btn-sm {
+    padding: 0.45rem 1rem;
+    font-size: 0.85rem;
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* ------------------------------------------------------------
+   BADGES / TAGS
+   ------------------------------------------------------------ */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.25rem 0.7rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    background: var(--surface-soft);
+    color: var(--primary-dark);
+}
+
+.badge-esgotado {
+    background: var(--danger);
+    color: #FFFFFF;
+}
+
+.badge-condicao {
+    background: var(--secondary);
+    color: #FFFFFF;
+}
+
+.badge-etiqueta {
+    background: var(--accent);
+    color: #4A3F35;
+}
+
+.chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.35rem 0.8rem;
+    border-radius: 999px;
+    background: var(--surface-soft);
+    border: 1px solid var(--border);
+    font-size: 0.85rem;
+}
+
+.chip button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 1;
+}
+
+.chip button:hover {
+    color: var(--danger);
+}
+
+/* ------------------------------------------------------------
+   ESTADOS / UTILIDADES
+   ------------------------------------------------------------ */
+.oculto {
+    display: none !important;
+}
+
+.erro {
+    color: var(--danger);
+    font-size: 0.9rem;
+    min-height: 1.2em;
+}
+
+.sucesso {
+    color: var(--success);
+    font-size: 0.9rem;
+}
+
+.skeleton {
+    background: linear-gradient(90deg, var(--surface-soft) 25%, #EDE1D0 37%, var(--surface-soft) 63%);
+    background-size: 400% 100%;
+    animation: skeleton-loading 1.4s ease infinite;
+    border-radius: var(--radius);
+}
+
+@keyframes skeleton-loading {
+    0% { background-position: 100% 50%; }
+    100% { background-position: 0 50%; }
+}
+
+/* ------------------------------------------------------------
+   HEADER PADRÃO
+   ------------------------------------------------------------ */
+header.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(251, 246, 238, 0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+}
+
+header.site-header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 0;
+}
+
+header.site-header nav ul {
+    display: flex;
+    align-items: center;
+    gap: 1.6rem;
+    font-weight: 700;
+    color: var(--muted);
+}
+
+header.site-header nav a:hover {
+    color: var(--primary-dark);
+}
+
+/* ------------------------------------------------------------
+   FOOTER PADRÃO
+   ------------------------------------------------------------ */
+footer.site-footer {
+    background: var(--surface-soft);
+    border-top: 1px solid var(--border);
+    padding: 2rem 0;
+    margin-top: 3rem;
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+
+footer.site-footer a {
+    color: var(--primary-dark);
+    font-weight: 700;
+}
