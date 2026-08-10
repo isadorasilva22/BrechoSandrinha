@@ -31,6 +31,7 @@ const formPeca = document.getElementById("formPeca");
 const tituloForm = document.getElementById("tituloForm");
 const campoTitulo = document.getElementById("titulo");
 const campoPreco = document.getElementById("preco");
+const campoMarca = document.getElementById("marca");
 const campoDescricao = document.getElementById("descricao");
 const inputCor = document.getElementById("inputCor");
 const btnAddCor = document.getElementById("btnAddCor");
@@ -210,6 +211,7 @@ function renderizarListaPecas() {
                     <div class="peca-badges">
                         <span class="badge">${escapeHtml(peca.categoria || "Sem categoria")}</span>
                         <span class="badge badge-condicao">${rotuloNivelUso(peca.nivelUso)}</span>
+                        ${peca.marca ? `<span class="badge">${escapeHtml(peca.marca)}</span>` : ""}
                         ${peca.comEtiqueta ? `<span class="badge badge-etiqueta">Com etiqueta</span>` : ""}
                         ${peca.esgotado ? `<span class="badge badge-esgotado">Esgotado</span>` : ""}
                     </div>
@@ -249,6 +251,7 @@ function iniciarEdicao(id) {
     campoTitulo.value = peca.titulo || "";
     selectCategoria.value = peca.categoria || "";
     campoPreco.value = typeof peca.preco === "number" ? peca.preco : "";
+    campoMarca.value = peca.marca || "";
     campoDescricao.value = peca.descricao || "";
     campoNivelUso.value = peca.nivelUso || "novo";
     campoComEtiqueta.checked = Boolean(peca.comEtiqueta);
@@ -316,6 +319,7 @@ formPeca.addEventListener("submit", async (evento) => {
             titulo: campoTitulo.value.trim(),
             categoria: selectCategoria.value,
             preco: Number(campoPreco.value),
+            marca: campoMarca.value.trim(),
             descricao: campoDescricao.value.trim(),
             cores,
             nivelUso: campoNivelUso.value,

@@ -53,9 +53,12 @@ let pecaAberta = null;
 // ============================================================
 // CATEGORIAS (para montar o filtro dinamicamente)
 // ============================================================
+let categoriaDaUrlAplicada = false;
+
 onSnapshot(query(collection(db, "categorias"), orderBy("nome")), (snapshot) => {
     categorias = snapshot.docs.map((documento) => documento.data().nome);
     renderizarFiltroCategorias();
+    aplicarCategoriaDaUrlSeExistir();
 });
 
 function renderizarFiltroCategorias() {
@@ -70,6 +73,20 @@ function renderizarFiltroCategorias() {
     filtroCategorias.querySelectorAll(".filtroCategoria").forEach((checkbox) => {
         checkbox.addEventListener("change", aplicarFiltros);
     });
+}
+
+function aplicarCategoriaDaUrlSeExistir() {
+    if (categoriaDaUrlAplicada) return;
+
+    const categoriaUrl = new URLSearchParams(location.search).get("categoria");
+    if (!categoriaUrl) return;
+
+    const checkbox = filtroCategorias.querySelector(`.filtroCategoria[value="${CSS.escape(categoriaUrl)}"]`);
+    if (checkbox) {
+        checkbox.checked = true;
+        categoriaDaUrlAplicada = true;
+        aplicarFiltros();
+    }
 }
 
 // ============================================================
@@ -191,6 +208,7 @@ function abrirModal(id) {
     modalBadges.innerHTML = `
         <span class="badge">${escapeHtml(peca.categoria || "")}</span>
         <span class="badge badge-condicao">${rotuloNivelUso(peca.nivelUso)}</span>
+        ${peca.marca ? `<span class="badge">${escapeHtml(peca.marca)}</span>` : ""}
         ${peca.comEtiqueta ? `<span class="badge badge-etiqueta">Com etiqueta</span>` : ""}
     `;
 
