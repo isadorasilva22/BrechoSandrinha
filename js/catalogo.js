@@ -157,6 +157,7 @@ function renderizarGrid(lista) {
                 <img src="${peca.imagens?.[0]?.url || ""}" alt="${escapeAttr(peca.titulo)}">
                 <div class="card-badges">
                     ${peca.esgotado ? `<span class="badge badge-esgotado">Esgotado</span>` : ""}
+                    ${peca.comEtiqueta ? `<span class="badge badge-etiqueta">Com etiqueta</span>` : ""}
                 </div>
             </div>
             <div class="card-info">
@@ -264,44 +265,20 @@ function formatarPreco(valor) {
 // ============================================================
 function atualizarLinksCompartilhar(peca) {
     const link = `${location.origin}${location.pathname}?peca=${peca.id}`;
-    const mensagem = `Olá, tudo bem? Essa peça ainda está disponível: ${peca.titulo} — ${link}`;
+    const texto = `Olha essa peça que encontrei no Brechó Sandrinha: ${peca.titulo} — ${link}`;
 
-    btnCompartilharInstagram.onclick = () => compartilharNoInstagram(peca, mensagem);
+    btnCompartilharInstagram.href = `https://ig.me/m/${INSTAGRAM_HANDLE}`;
+    btnCompartilharInstagram.onclick = () => {
+        // O Instagram não aceita texto pré-preenchido via link, então copiamos
+        // o texto para a área de transferência para a pessoa colar na conversa.
+        copiarParaAreaDeTransferencia(texto, "Texto da peça copiado! Cole na conversa que abriu no Instagram.");
+    };
 
     btnCopiarLink.onclick = () => {
         // Sem número de WhatsApp no código: a pessoa copia o link e compartilha
         // por onde quiser (WhatsApp, SMS, etc.).
         copiarParaAreaDeTransferencia(link, "Link copiado! Cole numa conversa do WhatsApp (ou onde quiser).");
     };
-}
-
-async function compartilharNoInstagram(peca, mensagem) {
-    const urlImagem = peca.imagens?.[0]?.url;
-
-    // No celular: tenta usar o menu nativo de compartilhamento do aparelho (o mesmo
-    // que aparece ao compartilhar uma foto), já com a imagem e a mensagem juntas —
-    // a pessoa escolhe "Instagram" ali. É o mais próximo que a Instagram permite,
-    // já que não existe uma API pública pra pré-preencher o Direct por link.
-    if (urlImagem && navigator.canShare) {
-        try {
-            const resposta = await fetch(urlImagem);
-            const blob = await resposta.blob();
-            const arquivo = new File([blob], "peca.jpg", { type: blob.type || "image/jpeg" });
-
-            if (navigator.canShare({ files: [arquivo] })) {
-                await navigator.share({ files: [arquivo], text: mensagem, title: peca.titulo });
-                return;
-            }
-        } catch {
-            // Usuário cancelou o compartilhamento ou o navegador falhou — segue pro fallback abaixo.
-        }
-    }
-
-    // Fallback (computador, ou navegador sem suporte a compartilhar arquivos):
-    // abre a conversa do Instagram e copia a mensagem — a foto precisa ser enviada
-    // manualmente, já que a Instagram não aceita anexo por link.
-    window.open(`https://ig.me/m/${INSTAGRAM_HANDLE}`, "_blank", "noopener");
-    copiarParaAreaDeTransferencia(mensagem, "Mensagem copiada! Cole na conversa do Instagram (a foto precisa ser enviada manualmente).");
 }
 
 function copiarParaAreaDeTransferencia(texto, mensagem) {
