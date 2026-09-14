@@ -20,66 +20,56 @@
                 <img src="imagens/logo.jpeg" alt="Brechó Sandrinha" class="marca-logo">
                 Brechó Sandrinha
             </a>
-            <nav>
-                <ul>
-                    <li><a href="index.html">Início</a></li>
-                    <li><a href="catalogo.html">Catálogo</a></li>
-                    <li><a href="#sobre">Sobre</a></li>
-                    <li><a href="admin.html" class="btn-admin" title="Administração"><i class="fa-solid fa-lock"></i></a></li>
-                </ul>
-            </nav>
+            <div class="header-direita">
+                <nav>
+                    <ul>
+                        <li><a href="index.html" class="ativo">Início</a></li>
+                        <li><a href="catalogo.html">Catálogo</a></li>
+                        <li><a href="#sobre">Sobre</a></li>
+                        <li><a href="admin.html" class="btn-admin" title="Administração"><i class="fa-solid fa-lock"></i></a></li>
+                    </ul>
+                </nav>
+                <form class="busca-form" action="catalogo.html" method="get" role="search">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" name="busca" placeholder="Buscar peças...">
+                </form>
+            </div>
         </div>
     </header>
 
+    <!-- ============================================================
+         HERO
+         ============================================================ -->
     <section class="hero">
-        <div class="container hero-content">
+        <div class="container hero-card">
+            <div class="hero-media">
+                <div class="hero-blob"></div>
+                <img src="imagens/logo.jpeg" alt="Brechó Sandrinha" class="hero-logo">
+                <span class="hero-frase">peças únicas<br>histórias reais<i class="fa-solid fa-heart"></i></span>
+            </div>
             <div class="hero-text">
                 <span class="tag">moda circular, com afeto</span>
-                <h1>Peças com história, prontas pra ganhar a sua</h1>
+                <h1>Garimpe sua<br>próxima peça</h1>
                 <p>
-                    O Brechó Sandrinha reúne roupas seminovas e usadas selecionadas com carinho.
-                    Navegue pelo catálogo, filtre por categoria, cor e estado de conservação, e
-                    compartilhe as peças que você amou.
+                    Aqui, cada roupa tem uma história. Mais do que estilo, é sobre
+                    dar novos começos para o que já foi amado.
                 </p>
                 <a href="catalogo.html" class="btn btn-primary">
-                    <i class="fa-solid fa-bag-shopping"></i>
-                    Ver catálogo
+                    Ver catálogo <i class="fa-solid fa-arrow-right"></i>
                 </a>
             </div>
-            <div class="hero-image">
-                <div class="blob"></div>
-                <img src="imagens/logo.jpeg" alt="Brechó Sandrinha" class="hero-logo">
-            </div>
         </div>
     </section>
 
-    <section id="sobre" class="sobre">
-        <div class="container">
-            <h2>Por que garimpar no Brechó Sandrinha?</h2>
-            <div class="cards">
-                <div class="card">
-                    <i class="fa-solid fa-leaf"></i>
-                    <h3>Consumo consciente</h3>
-                    <p>Dar uma segunda vida às roupas é bom pro bolso e pro planeta.</p>
-                </div>
-                <div class="card">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                    <h3>Filtros que ajudam</h3>
-                    <p>Busque por categoria, cor, nível de uso e peças com etiqueta.</p>
-                </div>
-                <div class="card">
-                    <i class="fa-solid fa-share-nodes"></i>
-                    <h3>Fácil de compartilhar</h3>
-                    <p>Achou a peça perfeita? Manda no Instagram na hora.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
+    <!-- ============================================================
+         CATEGORIAS
+         ============================================================ -->
     <section id="categorias" class="categorias-preview">
         <div class="container">
-            <h2>Categorias</h2>
-            <p class="subtitulo">As categorias do catálogo são cadastradas pela administração e aparecem automaticamente aqui.</p>
+            <div class="secao-topo">
+                <h2>Categorias<span class="linha-decorativa"></span></h2>
+                <a href="catalogo.html" class="link-ver-todas">Ver todas <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
             <div class="categoria-grid">
                 <a href="catalogo.html?categoria=Blusas" class="categoria"><i class="fa-solid fa-shirt"></i><span>Blusas</span></a>
                 <a href="catalogo.html?categoria=Calças" class="categoria"><span class="icone-personalizado icone-calcas" aria-hidden="true"></span><span>Calças</span></a>
@@ -87,6 +77,115 @@
                 <a href="catalogo.html?categoria=Calçados" class="categoria"><i class="fa-solid fa-shoe-prints"></i><span>Calçados</span></a>
                 <a href="catalogo.html" class="categoria"><i class="fa-solid fa-ellipsis"></i><span>Outras</span></a>
             </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         DESTAQUES DO CATÁLOGO — peças marcadas como destaque no admin
+         ============================================================ -->
+    <section id="destaques" class="destaques">
+        <div class="container">
+            <div class="secao-topo">
+                <div>
+                    <h2>Destaques do Catálogo</h2>
+                    <p class="subtitulo">Peças selecionadas com muito carinho para você.</p>
+                </div>
+            </div>
+            <div class="destaques-layout">
+                <div id="gridDestaques" class="grid-destaques"></div>
+                <aside class="card-instagram">
+                    <span class="card-instagram-icone"><i class="fa-brands fa-instagram"></i></span>
+                    <h3>Nos acompanhe no Instagram</h3>
+                    <p>Novidades, peças em destaque e bastidores do brechó por lá.</p>
+                    <a href="https://instagram.com/brechosandrinha2026" target="_blank" rel="noopener" class="btn btn-primary btn-sm">
+                        Seguir agora <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SOBRE A LOJA
+         ============================================================ -->
+    <section id="sobre" class="sobre-loja">
+        <div class="container">
+            <span class="tag tag-centro">Sobre a Brechó Sandrinha</span>
+            <h2>Moda consciente, direto do brechó pra você</h2>
+            <p>
+                O Brechó Sandrinha nasceu do carinho por dar uma segunda vida às roupas.
+                Aqui você encontra peças seminovas e usadas selecionadas com atenção aos
+                detalhes, sempre com bom custo-benefício. Toda semana chegam novidades
+                para renovar o seu estilo sem pesar no bolso nem no planeta.
+            </p>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         POR QUE ESCOLHER
+         ============================================================ -->
+    <section class="motivos">
+        <div class="container">
+            <h2>Por que escolher o Brechó Sandrinha?</h2>
+            <div class="motivos-grid">
+                <div class="motivo">
+                    <span class="motivo-icone"><i class="fa-solid fa-gem"></i></span>
+                    <h3>Peças únicas</h3>
+                    <p>Cada peça é selecionada com carinho para você.</p>
+                </div>
+                <div class="motivo">
+                    <span class="motivo-icone"><i class="fa-solid fa-leaf"></i></span>
+                    <h3>Moda sustentável</h3>
+                    <p>Consumo consciente que faz bem ao planeta.</p>
+                </div>
+                <div class="motivo">
+                    <span class="motivo-icone"><i class="fa-solid fa-sparkles"></i></span>
+                    <h3>Novidades toda semana</h3>
+                    <p>Sempre tem algo novo esperando por você.</p>
+                </div>
+                <div class="motivo">
+                    <span class="motivo-icone"><i class="fa-solid fa-tags"></i></span>
+                    <h3>Preço acessível</h3>
+                    <p>Estilo sem pesar no bolso.</p>
+                </div>
+                <div class="motivo">
+                    <span class="motivo-icone"><i class="fa-solid fa-heart"></i></span>
+                    <h3>Fácil de compartilhar</h3>
+                    <p>Achou a peça perfeita? Manda no Instagram na hora.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         COMO COMPRAR
+         ============================================================ -->
+    <section class="como-comprar">
+        <div class="container">
+            <h2>Como comprar</h2>
+            <p class="subtitulo subtitulo-centro">
+                Navegue pelo catálogo e fale com a gente pelas redes sociais. É simples, rápido e sem complicação.
+            </p>
+            <div class="passos-grid">
+                <div class="passo">
+                    <span class="passo-icone"><i class="fa-solid fa-eye"></i></span>
+                    <h3>Veja as peças</h3>
+                    <p>Filtre por categoria, cor e estado de conservação no catálogo.</p>
+                </div>
+                <div class="passo">
+                    <span class="passo-icone"><i class="fa-solid fa-comment-dots"></i></span>
+                    <h3>Escolha e compartilhe</h3>
+                    <p>Copie o link da peça ou manda direto no Instagram.</p>
+                </div>
+                <div class="passo">
+                    <span class="passo-icone"><i class="fa-brands fa-instagram"></i></span>
+                    <h3>Siga nas redes</h3>
+                    <p>Fique por dentro das novidades e promoções.</p>
+                </div>
+            </div>
+            <a href="catalogo.html" class="btn btn-primary">
+                <i class="fa-solid fa-bag-shopping"></i> Ver catálogo
+            </a>
         </div>
     </section>
 
@@ -99,5 +198,6 @@
     <script>
         document.getElementById("anoAtual").textContent = new Date().getFullYear();
     </script>
+    <script type="module" src="js/home.js"></script>
 </body>
 </html>

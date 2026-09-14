@@ -200,6 +200,11 @@ h1, h2, h3, h4 {
     color: #4A3F35;
 }
 
+.badge-destaque {
+    background: var(--primary-dark);
+    color: #FFFFFF;
+}
+
 .chip {
     display: inline-flex;
     align-items: center;
@@ -282,6 +287,10 @@ header.site-header nav ul {
 }
 
 header.site-header nav a:hover {
+    color: var(--primary-dark);
+}
+
+header.site-header nav a.ativo {
     color: var(--primary-dark);
 }
 

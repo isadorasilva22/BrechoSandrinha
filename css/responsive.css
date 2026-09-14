@@ -4,9 +4,19 @@
 
 @media (max-width: 960px) {
     /* index */
-    .hero-content {
+    .hero-card {
         grid-template-columns: 1fr;
+    }
+
+    .hero-media {
+        padding: 2rem;
+        min-height: 220px;
+    }
+
+    .hero-text {
+        padding: 2rem 1.8rem 2.4rem;
         text-align: center;
+        align-items: center;
     }
 
     .hero-text p {
@@ -14,17 +24,16 @@
         margin-right: auto;
     }
 
-    .hero-image {
-        order: -1;
-        height: 220px;
-    }
-
-    .cards {
+    .destaques-layout {
         grid-template-columns: 1fr;
     }
 
-    .categoria-grid {
-        grid-template-columns: repeat(3, 1fr);
+    .motivos-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .passos-grid {
+        grid-template-columns: 1fr;
     }
 
     /* catálogo */
@@ -73,12 +82,20 @@
         font-size: 0.85rem;
     }
 
+    .busca-form {
+        display: none;
+    }
+
     .hero-text h1 {
         font-size: 2rem;
     }
 
-    .categoria-grid {
-        grid-template-columns: repeat(2, 1fr);
+    .motivos-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .grid-destaques {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     }
 
     .grid {

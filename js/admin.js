@@ -39,6 +39,7 @@ const listaCores = document.getElementById("listaCores");
 const campoNivelUso = document.getElementById("nivelUso");
 const campoComEtiqueta = document.getElementById("comEtiqueta");
 const campoEsgotado = document.getElementById("esgotado");
+const campoDestaque = document.getElementById("destaque");
 const inputImagens = document.getElementById("imagens");
 const previewImagens = document.getElementById("previewImagens");
 const statusForm = document.getElementById("statusForm");
@@ -214,6 +215,7 @@ function renderizarListaPecas() {
                         ${peca.marca ? `<span class="badge">${escapeHtml(peca.marca)}</span>` : ""}
                         ${peca.comEtiqueta ? `<span class="badge badge-etiqueta">Com etiqueta</span>` : ""}
                         ${peca.esgotado ? `<span class="badge badge-esgotado">Esgotado</span>` : ""}
+                        ${peca.destaque ? `<span class="badge badge-destaque"><i class="fa-solid fa-star"></i> Destaque</span>` : ""}
                     </div>
                     <div class="peca-acoes">
                         <button type="button" class="btn btn-outline btn-sm" data-editar="${peca.id}">Editar</button>
@@ -256,6 +258,7 @@ function iniciarEdicao(id) {
     campoNivelUso.value = peca.nivelUso || "novo";
     campoComEtiqueta.checked = Boolean(peca.comEtiqueta);
     campoEsgotado.checked = Boolean(peca.esgotado);
+    campoDestaque.checked = Boolean(peca.destaque);
 
     cores = [...(peca.cores || [])];
     renderizarCores();
@@ -325,6 +328,7 @@ formPeca.addEventListener("submit", async (evento) => {
             nivelUso: campoNivelUso.value,
             comEtiqueta: campoComEtiqueta.checked,
             esgotado: campoEsgotado.checked,
+            destaque: campoDestaque.checked,
             imagens
         };
 

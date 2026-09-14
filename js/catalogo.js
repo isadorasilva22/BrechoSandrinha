@@ -50,6 +50,10 @@ let carregando = true;
 let indiceImagemAtual = 0;
 let pecaAberta = null;
 
+// Preenche a busca a partir de ?busca= (link vindo da home) antes do primeiro filtro.
+const buscaDaUrl = new URLSearchParams(location.search).get("busca");
+if (buscaDaUrl) campoBusca.value = buscaDaUrl;
+
 // ============================================================
 // CATEGORIAS (para montar o filtro dinamicamente)
 // ============================================================
