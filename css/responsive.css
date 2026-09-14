@@ -28,10 +28,6 @@
         grid-template-columns: 1fr;
     }
 
-    .motivos-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
     .passos-grid {
         grid-template-columns: 1fr;
     }
@@ -88,10 +84,6 @@
 
     .hero-text h1 {
         font-size: 2rem;
-    }
-
-    .motivos-grid {
-        grid-template-columns: 1fr;
     }
 
     .grid-destaques {

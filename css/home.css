@@ -414,8 +414,9 @@
 }
 
 .motivos-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 1.2rem;
 }
 
@@ -426,6 +427,8 @@
     padding: 1.8rem 1.2rem;
     text-align: center;
     box-shadow: var(--shadow);
+    flex: 1 1 200px;
+    max-width: 220px;
 }
 
 .motivo-icone {
